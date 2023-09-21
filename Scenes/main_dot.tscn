@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://pjokt30dmv38"]
+
+[ext_resource type="Texture2D" uid="uid://b28cxvysjdlou" path="res://Sprites/maindot.png" id="1_v8nhj"]
+[ext_resource type="Script" path="res://Scenes/model.gd" id="2_tx53a"]
+
+[node name="MainDot" type="Sprite2D"]
+scale = Vector2(0.006, 0.006)
+texture = ExtResource("1_v8nhj")
+script = ExtResource("2_tx53a")

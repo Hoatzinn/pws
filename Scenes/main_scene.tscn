@@ -1,10 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://m3287mvdl0jr"]
+[gd_scene load_steps=3 format=3 uid="uid://m3287mvdl0jr"]
 
-[ext_resource type="PackedScene" uid="uid://pjokt30dmv38" path="res://Scenes/main_dot.tscn" id="1_o4udb"]
+[ext_resource type="Script" path="res://Scenes/model.gd" id="1_dgi6p"]
+[ext_resource type="Script" path="res://Scenes/main_dot_slider.gd" id="2_vx0bs"]
 
 [node name="MainScene" type="Node2D"]
 
-[node name="Model" type="Node2D" parent="."]
+[node name="Model" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+script = ExtResource("1_dgi6p")
+main_dot_amount = 5
 
-[node name="MainDot" parent="." instance=ExtResource("1_o4udb")]
-position = Vector2(542, 287)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainDotSlider" type="HSlider" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 30.0
+offset_right = 212.0
+offset_bottom = 77.0
+size_flags_horizontal = 0
+min_value = 3.0
+max_value = 12.0
+value = 3.0
+script = ExtResource("2_vx0bs")
+
+[node name="Label" type="Label" parent="CanvasLayer/MainDotSlider"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -10.0
+offset_right = 44.0
+offset_bottom = 13.0
+
+[connection signal="value_changed" from="CanvasLayer/MainDotSlider" to="Model" method="_on_main_dot_slider_value_changed"]

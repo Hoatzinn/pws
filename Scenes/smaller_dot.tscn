@@ -3,5 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://g2tawjsaug7n" path="res://Sprites/whitecircle.png" id="1_vqy42"]
 
 [node name="SmallerDot" type="Sprite2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.067, 0.067)
 texture = ExtResource("1_vqy42")

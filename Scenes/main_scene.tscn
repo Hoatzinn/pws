@@ -1,22 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://m3287mvdl0jr"]
+[gd_scene load_steps=5 format=3 uid="uid://m3287mvdl0jr"]
 
 [ext_resource type="Script" path="res://Scenes/model.gd" id="1_dgi6p"]
 [ext_resource type="Script" path="res://Scenes/main_dot_slider.gd" id="2_vx0bs"]
+[ext_resource type="Script" path="res://Scenes/RSlider.gd" id="3_6yrfl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ym6hs"]
+font_size = 14
 
 [node name="MainScene" type="Node2D"]
 
 [node name="Model" type="Camera2D" parent="."]
 zoom = Vector2(0.2, 0.2)
 script = ExtResource("1_dgi6p")
-main_dot_amount = 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainDotSlider" type="HSlider" parent="CanvasLayer"]
-offset_left = 1.0
-offset_top = 30.0
-offset_right = 212.0
-offset_bottom = 77.0
+offset_left = 3.0
+offset_top = 93.0
+offset_right = 209.0
+offset_bottom = 109.0
 size_flags_horizontal = 0
 min_value = 3.0
 max_value = 12.0
@@ -25,9 +28,49 @@ script = ExtResource("2_vx0bs")
 
 [node name="Label" type="Label" parent="CanvasLayer/MainDotSlider"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = -10.0
-offset_right = 44.0
-offset_bottom = 13.0
+offset_left = 6.0
+offset_top = -23.0
+offset_right = 208.0
+offset_bottom = 3.0
+text = "Number of big main dots: 3"
+label_settings = SubResource("LabelSettings_ym6hs")
+vertical_alignment = 1
 
-[connection signal="value_changed" from="CanvasLayer/MainDotSlider" to="Model" method="_on_main_dot_slider_value_changed"]
+[node name="RSlider" type="HSlider" parent="CanvasLayer"]
+offset_left = 3.0
+offset_top = 127.0
+offset_right = 209.0
+offset_bottom = 143.0
+size_flags_horizontal = 0
+max_value = 1.0
+step = 0.1
+value = 0.5
+script = ExtResource("3_6yrfl")
+
+[node name="Label" type="Label" parent="CanvasLayer/RSlider"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -23.0
+offset_right = 208.0
+offset_bottom = 3.0
+text = "Value of r: 0.5"
+label_settings = SubResource("LabelSettings_ym6hs")
+vertical_alignment = 1
+
+[node name="ResetButton" type="Button" parent="CanvasLayer"]
+offset_left = 30.0
+offset_top = 6.0
+offset_right = 144.0
+offset_bottom = 37.0
+text = "reset"
+
+[node name="RecalculateR" type="Button" parent="CanvasLayer"]
+offset_left = 161.0
+offset_top = 7.0
+offset_right = 280.0
+offset_bottom = 38.0
+text = "recalculate r"
+
+[connection signal="pressed" from="CanvasLayer/ResetButton" to="Model" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/RecalculateR" to="Model" method="_on_recalculate_r_pressed"]
+[connection signal="pressed" from="CanvasLayer/RecalculateR" to="CanvasLayer/RSlider" method="_on_recalculate_r_pressed"]

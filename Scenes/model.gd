@@ -9,9 +9,12 @@ var old_pos:Vector2
 @export var r:float = 0.5
 
 
-'''
-TODO: reset + sliders, hue, cantchoosesamepointtwice, camera slide or whatever
-'''
+
+# TODO: hue
+# TODO: cantchoosesamepointtwice
+# TODO: camera slide or whatever
+# TODO: pausing the sim
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,13 +41,23 @@ func new_small_dot():
 		pass
 	else:
 		var random_main_dot = main_dots[randf_range(0, len(main_dots))]
-		#print(random_main_dot, main_dots)
 		
 		var target_location:Vector2 = (old_pos+random_main_dot.position)*r # cannot find a random dot
 		
 		var small_dot = preload("res://Scenes/smaller_dot.tscn").instantiate()
 		add_child(small_dot)
+		
 		small_dot.position = target_location
+		
+		var locations:Array
+		for main_dot in main_dots:
+			locations.append(main_dot.position.distance_to(small_dot.position))
+		
+		var closest_main_dot = locations.find(locations.min())
+
+		var h = (1.0/main_dot_amount)*closest_main_dot+1.0/main_dot_amount
+		small_dot.modulate = Color.from_hsv(h,0.4,1)
+		
 		old_pos = target_location
 
 func reset(r_local, main_dot_amount_local):

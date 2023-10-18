@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://g2tawjsaug7n" path="res://Sprites/whitecircle.png" id="1_vqy42"]
 
-[node name="SmallerDot" type="Sprite2D"]
-scale = Vector2(0.067, 0.067)
+[node name="CanvasModulate" type="CanvasModulate"]
+scale = Vector2(1, 1)
+
+[node name="SmallerDot" type="Sprite2D" parent="."]
+scale = Vector2(0.011, 0.011)
 texture = ExtResource("1_vqy42")

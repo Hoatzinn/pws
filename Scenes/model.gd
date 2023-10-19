@@ -3,17 +3,20 @@ extends Camera2D
 #@export var radius:int
 @export var main_dot_amount:int = 3
 var zooming:int
-var main_dots = []
+var main_dots:Array = []
 @export var start_position:Vector2
 var old_pos:Vector2
 @export var r:float = 0.5
+@export var ccspt:bool = true
+var last_main_dot = null
 
 
 
-# TODO: hue
 # TODO: cantchoosesamepointtwice
 # TODO: camera slide or whatever
 # TODO: pausing the sim
+# TODO: better hue
+# TODO: dot count
 
 
 
@@ -28,7 +31,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	for i in range(20):
+	for i in range(30):
 		new_small_dot()
 	
 	if Input.is_action_pressed("zoom in"):
@@ -37,10 +40,22 @@ func _process(delta):
 		zoom = zoom.lerp(zoom*0.7, delta * 4.0)
 
 func new_small_dot():
+	var random_main_dot_index:int
+	var random_main_dot:Sprite2D
 	if get_child_count() == 0:
 		pass
 	else:
-		var random_main_dot = main_dots[randf_range(0, len(main_dots))]
+		if not ccspt:
+			random_main_dot_index = randf_range(0, len(main_dots))
+		else:
+			if last_main_dot == null:
+				random_main_dot_index = randf_range(0, len(main_dots))
+			else:
+				random_main_dot_index = randf_range(0, len(main_dots))
+				while random_main_dot_index == last_main_dot:
+					random_main_dot_index = randf_range(0, len(main_dots))
+		
+		random_main_dot = main_dots[random_main_dot_index]
 		
 		var target_location:Vector2 = (old_pos+random_main_dot.position)*r # cannot find a random dot
 		
@@ -59,6 +74,7 @@ func new_small_dot():
 		small_dot.modulate = Color.from_hsv(h,0.4,1)
 		
 		old_pos = target_location
+		last_main_dot = random_main_dot_index
 
 func reset(r_local, main_dot_amount_local):
 	randomize()

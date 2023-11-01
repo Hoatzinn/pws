@@ -2,7 +2,6 @@ extends Camera2D
 
 #@export var radius:int
 @export var main_dot_amount:int = 3
-var zooming:int
 var main_dots:Array = []
 @export var start_position:Vector2
 var old_pos:Vector2
@@ -12,7 +11,6 @@ var last_main_dot = null
 
 
 
-# TODO: cantchoosesamepointtwice
 # TODO: camera slide or whatever
 # TODO: pausing the sim
 # TODO: better hue
@@ -31,14 +29,14 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	for i in range(30):
 		new_small_dot()
 	
-	if Input.is_action_pressed("zoom in"):
+	'''if Input.is_action_pressed("zoom in"):
 		zoom = zoom.lerp(zoom*1.3, delta * 4.0)
 	elif Input.is_action_pressed("zoom out"):
-		zoom = zoom.lerp(zoom*0.7, delta * 4.0)
+		zoom = zoom.lerp(zoom*0.7, delta * 4.0)'''
 
 func new_small_dot():
 	var random_main_dot_index:int
@@ -62,6 +60,7 @@ func new_small_dot():
 		
 		var small_dot = preload("res://Scenes/smaller_dot.tscn").instantiate()
 		add_child(small_dot)
+		small_dot.top_level = true
 		
 		small_dot.position = target_location
 		
@@ -95,6 +94,7 @@ func reset(r_local, main_dot_amount_local):
 		add_child(main_dot)
 		main_dot.position = new_position
 		main_dot.name = name_scheme % (i+1)
+		main_dot.top_level = true
 		main_dots.append(main_dot)
 		
 	for dot in get_children():
@@ -114,8 +114,16 @@ func _on_recalculate_r_pressed():
 func _on_reset_button_pressed():
 	reset(r, main_dot_amount)
 
-
-
-
 func _on_ccspt_button_toggled(button_pressed):
 	ccspt = button_pressed
+	
+func _unhandled_input(event):
+	if event.is_action_pressed("zoom in"):
+		zoom = zoom*1.3
+	if event.is_action_pressed("zoom out"):
+		zoom = zoom*0.7
+	if event is InputEventMouseMotion:
+		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
+			print(position)
+			position -= event.relative / zoom
+

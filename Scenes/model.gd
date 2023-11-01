@@ -7,7 +7,7 @@ var main_dots:Array = []
 @export var start_position:Vector2
 var old_pos:Vector2
 @export var r:float = 0.5
-@export var ccspt:bool = true
+@export var ccspt:bool = false
 var last_main_dot = null
 
 
@@ -17,6 +17,7 @@ var last_main_dot = null
 # TODO: pausing the sim
 # TODO: better hue
 # TODO: dot count
+# TODO: every possible outcome
 
 
 
@@ -112,3 +113,9 @@ func _on_recalculate_r_pressed():
 
 func _on_reset_button_pressed():
 	reset(r, main_dot_amount)
+
+
+
+
+func _on_ccspt_button_toggled(button_pressed):
+	ccspt = button_pressed

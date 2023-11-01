@@ -71,6 +71,16 @@ offset_right = 280.0
 offset_bottom = 38.0
 text = "recalculate r"
 
+[node name="ccsptButton" type="CheckBox" parent="CanvasLayer"]
+offset_left = 288.0
+offset_top = 3.0
+offset_right = 356.0
+offset_bottom = 34.0
+scale = Vector2(1.1133, 1.1133)
+button_pressed = true
+text = "ccspt"
+
 [connection signal="pressed" from="CanvasLayer/ResetButton" to="Model" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="Model" method="_on_recalculate_r_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="CanvasLayer/RSlider" method="_on_recalculate_r_pressed"]
+[connection signal="toggled" from="CanvasLayer/ccsptButton" to="Model" method="_on_ccspt_button_toggled"]

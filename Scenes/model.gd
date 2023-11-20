@@ -10,9 +10,9 @@ var old_pos:Vector2
 var last_main_dot = null
 var pause:bool = false
 
-
-
-# TODO: pausing the sim
+# TODO: sim speed
+# TODO: slider for smaller dot size
+# TODO: change location main dots
 # TODO: better hue
 # TODO: dot count
 # TODO: every possible outcome
@@ -106,17 +106,6 @@ func reset(r_local, main_dot_amount_local):
 	
 	old_pos = start_position
 	
-
-
-func _on_recalculate_r_pressed():
-	r = 1-(main_dot_amount/(main_dot_amount+3.0))
-
-
-func _on_reset_button_pressed():
-	reset(r, main_dot_amount)
-
-func _on_ccspt_button_toggled(button_pressed):
-	ccspt = button_pressed
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("zoom in"):
@@ -128,6 +117,18 @@ func _unhandled_input(event):
 			position -= event.relative / zoom
 
 
+func _on_recalculate_r_pressed():
+	r = 1-(main_dot_amount/(main_dot_amount+3.0))
+
+
+func _on_reset_button_pressed():
+	reset(r, main_dot_amount)
+
+func _on_ccspt_button_toggled(button_pressed):
+	ccspt = button_pressed
 
 func _on_pause_button_pressed():
 	pause = not pause
+
+func _on_step_button_pressed():
+	new_small_dot()

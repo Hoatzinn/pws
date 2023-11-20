@@ -89,9 +89,15 @@ offset_bottom = 183.0
 text = "Pause"
 script = ExtResource("4_eq53k")
 
+[node name="StepButton" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Step"
+
 [connection signal="pressed" from="CanvasLayer/ResetButton" to="Model" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="Model" method="_on_recalculate_r_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="CanvasLayer/RSlider" method="_on_recalculate_r_pressed"]
 [connection signal="toggled" from="CanvasLayer/ccsptButton" to="Model" method="_on_ccspt_button_toggled"]
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="Model" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="CanvasLayer/PauseButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/StepButton" to="Model" method="_on_step_button_pressed"]

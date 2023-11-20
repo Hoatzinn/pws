@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://m3287mvdl0jr"]
+[gd_scene load_steps=6 format=3 uid="uid://m3287mvdl0jr"]
 
 [ext_resource type="Script" path="res://Scenes/model.gd" id="1_dgi6p"]
 [ext_resource type="Script" path="res://Scenes/main_dot_slider.gd" id="2_vx0bs"]
 [ext_resource type="Script" path="res://Scenes/RSlider.gd" id="3_6yrfl"]
+[ext_resource type="Script" path="res://Scenes/PauseButton.gd" id="4_eq53k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ym6hs"]
 font_size = 14
@@ -80,7 +81,17 @@ offset_bottom = 34.0
 scale = Vector2(1.1133, 1.1133)
 text = "ccspt"
 
+[node name="PauseButton" type="Button" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 152.0
+offset_right = 78.0
+offset_bottom = 183.0
+text = "Pause"
+script = ExtResource("4_eq53k")
+
 [connection signal="pressed" from="CanvasLayer/ResetButton" to="Model" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="Model" method="_on_recalculate_r_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="CanvasLayer/RSlider" method="_on_recalculate_r_pressed"]
 [connection signal="toggled" from="CanvasLayer/ccsptButton" to="Model" method="_on_ccspt_button_toggled"]
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="Model" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="CanvasLayer/PauseButton" method="_on_pressed"]

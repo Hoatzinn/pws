@@ -8,10 +8,10 @@ var old_pos:Vector2
 @export var r:float = 0.5
 @export var ccspt:bool = false
 var last_main_dot = null
+var pause:bool = false
 
 
 
-# TODO: camera slide or whatever
 # TODO: pausing the sim
 # TODO: better hue
 # TODO: dot count
@@ -30,8 +30,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	for i in range(30):
-		new_small_dot()
+	if not pause:
+		for i in range(30):
+			new_small_dot()
+	else:
+		pass
 	
 	'''if Input.is_action_pressed("zoom in"):
 		zoom = zoom.lerp(zoom*1.3, delta * 4.0)
@@ -41,9 +44,7 @@ func _physics_process(delta):
 func new_small_dot():
 	var random_main_dot_index:int
 	var random_main_dot:Sprite2D
-	if get_child_count() == 0:
-		pass
-	else:
+	if get_child_count() != 0:
 		if not ccspt:
 			random_main_dot_index = randf_range(0, len(main_dots))
 		else:
@@ -124,6 +125,9 @@ func _unhandled_input(event):
 		zoom = zoom*0.7
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
-			print(position)
 			position -= event.relative / zoom
 
+
+
+func _on_pause_button_pressed():
+	pause = not pause

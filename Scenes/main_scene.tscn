@@ -90,8 +90,10 @@ text = "Pause"
 script = ExtResource("4_eq53k")
 
 [node name="StepButton" type="Button" parent="CanvasLayer"]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 11.0
+offset_top = 188.0
+offset_right = 54.0
+offset_bottom = 219.0
 text = "Step"
 
 [connection signal="pressed" from="CanvasLayer/ResetButton" to="Model" method="_on_reset_button_pressed"]

@@ -1,6 +1,5 @@
 extends Camera2D
 
-#@export var radius:int
 @export var main_dot_amount:int = 3
 var main_dots:Array = []
 @export var start_position:Vector2
@@ -17,30 +16,23 @@ var pause:bool = false
 #TODO: dot count
 #TODO: every possible outcome
 
-
-
-# Called when the node enters the scene tree for the first time.
+#region Ready
 func _ready():
 	randomize()
 	
 	r = 1-(main_dot_amount/(main_dot_amount+3.0))
 	reset(r, main_dot_amount)
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#endregion
+#region Process
 func _physics_process(delta):
 	if not pause:
 		for i in range(10):
 			new_small_dot()
 	else:
 		pass
-	
-	'''if Input.is_action_pressed("zoom in"):
-		zoom = zoom.lerp(zoom*1.3, delta * 4.0)
-	elif Input.is_action_pressed("zoom out"):
-		zoom = zoom.lerp(zoom*0.7, delta * 4.0)'''
-
+#endregion
+#region Spawning a new small dot
 func new_small_dot():
 	var random_main_dot_index:int
 	var random_main_dot:Sprite2D
@@ -77,6 +69,8 @@ func new_small_dot():
 		old_pos = target_location
 		last_main_dot = random_main_dot_index
 
+#endregion
+#region Reseting
 func reset(r_local, main_dot_amount_local):
 	randomize()
 	var viewport_size = get_viewport_rect().size
@@ -105,9 +99,10 @@ func reset(r_local, main_dot_amount_local):
 	print("\n--- Value of r: " + str(r) + "---")
 	
 	old_pos = start_position
-	
-	
+#endregion
+#region Camera movement
 func _unhandled_input(event):
+
 	if event.is_action_pressed("zoom in"):
 		zoom = zoom*1.3
 	if event.is_action_pressed("zoom out"):
@@ -115,11 +110,11 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
 			position -= event.relative / zoom
-
+#endregion
+#region Buttons pressed
 
 func _on_recalculate_r_pressed():
 	r = 1-(main_dot_amount/(main_dot_amount+3.0))
-
 
 func _on_reset_button_pressed():
 	reset(r, main_dot_amount)
@@ -132,3 +127,4 @@ func _on_pause_button_pressed():
 
 func _on_step_button_pressed():
 	new_small_dot()
+#endregion

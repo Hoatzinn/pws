@@ -10,12 +10,12 @@ var old_pos:Vector2
 var last_main_dot = null
 var pause:bool = false
 
-# TODO: sim speed
-# TODO: slider for smaller dot size
-# TODO: change location main dots
-# TODO: better hue
-# TODO: dot count
-# TODO: every possible outcome
+#TODO: sim speed
+#TODO: slider for smaller dot size
+#TODO: change location main dots
+#TODO: better hue
+#TODO: dot count
+#TODO: every possible outcome
 
 
 
@@ -31,7 +31,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if not pause:
-		for i in range(30):
+		for i in range(10):
 			new_small_dot()
 	else:
 		pass

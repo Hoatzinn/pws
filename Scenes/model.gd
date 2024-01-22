@@ -63,7 +63,7 @@ func new_small_dot():
 		
 		var closest_main_dot = locations.find(locations.min())
 
-		var h = (1.0/main_dot_amount)*closest_main_dot+1.0/main_dot_amount
+		var h =(1.0+closest_main_dot)/main_dot_amount
 		small_dot.modulate = Color.from_hsv(h,0.4,1)
 		
 		old_pos = target_location

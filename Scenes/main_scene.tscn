@@ -15,6 +15,9 @@ zoom = Vector2(0.2, 0.2)
 position_smoothing_enabled = true
 script = ExtResource("1_dgi6p")
 
+[node name="Line" type="Line2D" parent="Model"]
+points = PackedVector2Array(0, 0, 0, 0)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainDotSlider" type="HSlider" parent="CanvasLayer"]
@@ -45,7 +48,7 @@ offset_right = 209.0
 offset_bottom = 143.0
 size_flags_horizontal = 0
 max_value = 1.0
-step = 0.1
+step = 0.01
 value = 0.5
 script = ExtResource("3_6yrfl")
 
@@ -97,6 +100,13 @@ offset_right = 54.0
 offset_bottom = 219.0
 text = "Step"
 
+[node name="LineButton" type="CheckBox" parent="CanvasLayer"]
+offset_left = 288.0
+offset_top = 55.0
+offset_right = 312.0
+offset_bottom = 79.0
+text = "Line"
+
 [connection signal="pressed" from="CanvasLayer/ResetButton" to="Model" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="Model" method="_on_recalculate_r_pressed"]
 [connection signal="pressed" from="CanvasLayer/RecalculateR" to="CanvasLayer/RSlider" method="_on_recalculate_r_pressed"]
@@ -104,3 +114,4 @@ text = "Step"
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="Model" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="CanvasLayer/PauseButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/StepButton" to="Model" method="_on_step_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/LineButton" to="Model" method="_on_line_button_toggled"]
